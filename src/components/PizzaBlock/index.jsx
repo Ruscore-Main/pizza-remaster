@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import imageLoader from '../../assets/img/imageLoader.svg';
 
 const PizzaBlock = ({ name, imageUrl, types, sizes, price }) => {
-  console.log(types);
   const [count, setCount] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(sizes[0]);
   const [activeType, setActiveType] = React.useState(types[0]);
+  const [imageLoaded, setImageLoaded] = React.useState(false);
   const allTypes = ['тонкое', 'традиционное'];
   const allSizes = [26, 30, 40];
   return (
     
+    <div className="pizza-block-wrapper">
       <div className="pizza-block">
-        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+        <img className="pizza-block__image" onLoad={() => setImageLoaded(true)} src={imageLoaded ? imageUrl : imageLoader} alt="Pizza" />
         <h4 className="pizza-block__title">{name}</h4>
         <div className="pizza-block__selector">
           <ul>
@@ -63,6 +65,8 @@ const PizzaBlock = ({ name, imageUrl, types, sizes, price }) => {
           </button>
         </div>
       </div>
+    </div>
+      
   );
 };
 

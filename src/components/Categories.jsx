@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Categories = () => {
-  const [activeIndex, setActiveIndex] = React.useState(null);
+const Categories = ({activeIndex, setActiveIndex}) => {
+  
   const categories = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
   return (
     <div className="categories">

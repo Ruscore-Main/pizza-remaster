@@ -1,29 +1,33 @@
 import React from 'react';
 
-const Sort = () => {
-
-  const sorts = ['популярности', 'цене', 'алфавиту']
+const Sort = ({currentSort, setCurrentSort}) => {
+  const sorts = [
+    {name: 'популярности', sort: 'rating'},
+    {name: 'цене', sort: 'price'},
+    {name: 'алфавиту', sort: 'title'}
+  ];
   const [isVisible, setIsVisible] = React.useState(false);
-  const [currentSort, setCurrentSort] = React.useState(0)
 
+  
   const popup = React.useRef();
 
   const onClickListItem = (index) => {
     setCurrentSort(index);
     setIsVisible(false);
-  }  
+  };
 
   React.useEffect(() => {
-    document.addEventListener('click', (e)=>{
+    document.addEventListener('click', (e) => {
       const path = e.path || (e.composedPath && e.composedPath());
       !path.includes(popup.current) && setIsVisible(false);
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <div className="sort" ref={popup}>
       <div className="sort__label">
         <svg
+          className={isVisible ? 'rotated' : ''}
           width="10"
           height="6"
           viewBox="0 0 10 6"
@@ -35,15 +39,22 @@ const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setIsVisible(!isVisible)}>{sorts[currentSort]}</span>
+        <span onClick={() => setIsVisible(!isVisible)}>{sorts.find(el => el.sort == currentSort).name}</span>
       </div>
-      {
-        isVisible && <div className="sort__popup">
-        <ul>
-          {sorts.map((el, i) => <li key={i} className={currentSort == i ? 'active' : '' } onClick={() => onClickListItem(i)}>{el}</li>)}
-        </ul>
-      </div>
-      }
+      {isVisible && (
+        <div className="sort__popup">
+          <ul>
+            {sorts.map((obj, i) => (
+              <li
+                key={i}
+                className={currentSort == obj.sort ? 'active' : ''}
+                onClick={() => onClickListItem(obj.sort)}>
+                {obj.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
