@@ -1,0 +1,33 @@
+.root {
+    border: 1px solid rgba(0, 0, 0, .1);
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0 5px ;
+    
+    svg {
+        width: 24px;
+        opacity: .5;
+        margin-right: 5px;
+    }
+
+    input {
+        font-size: 1em;
+        border: none;
+        width: 300px;
+
+
+        @media (max-width: 950px) {
+            width: 200px;
+        }
+    }
+
+    &:focus-within {
+        border-color: rgba(0, 0, 0, .2);
+    }
+
+    @media (max-width: 950px) {
+        margin-top: 15px;
+    }
+}
