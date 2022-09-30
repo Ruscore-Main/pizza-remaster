@@ -16,7 +16,7 @@ const App = (props) => {
       <Header searchValue={searchValue} setSearchValue={setSearchValue}/>
       <div className="content">
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<Home searchValue={searchValue}/>} />
           <Route exact path="/cart" element={<Cart />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

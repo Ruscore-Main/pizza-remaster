@@ -4,8 +4,9 @@ import PizzaBlock from '../components/PizzaBlock';
 import PizzaLoader from '../components/PizzaBlock/PizzaLoader';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
+import Pagination from '../components/Pagination';
 
-const Home = () => {
+const Home = ({searchValue}) => {
   const [items, setItems] = React.useState([]);
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [categoryId, setCategoryId] = React.useState(null);
@@ -14,16 +15,22 @@ const Home = () => {
     sort: 'title',
     order: 'desc',
   });
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const amountPages = 2;
 
   React.useEffect(() => {
     setIsLoaded(false);
     // Ссылка на отправка запроса для получение пицц
     let fetchURL = 'https://63027a3b9eb72a839d705b29.mockapi.io/items';
 
-    fetchURL += `?sortBy=${sortType.sort}&order=${sortType.order}`
+    fetchURL += `?page=${currentPage}&limit=5&sortBy=${sortType.sort}&order=${sortType.order}`
 
     if (categoryId !== null) {
       fetchURL += `&category=${categoryId+1}`;
+    }
+
+    if (searchValue !== '') {
+      fetchURL += `&name=${searchValue}`;
     }
 
     fetch(fetchURL)
@@ -35,7 +42,7 @@ const Home = () => {
       });
 
     window.scrollTo(0, 0);
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   return (
     <div className="container">
@@ -64,6 +71,7 @@ const Home = () => {
               .fill(null)
               .map((_, i) => <PizzaLoader key={i} />)}
       </div>
+      <Pagination currentPage={currentPage} amountPages={amountPages} setCurrentPage={setCurrentPage}/>
     </div>
   );
 };

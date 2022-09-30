@@ -1,0 +1,43 @@
+.root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    li {
+        display: inline-flex;
+
+        &.selected {
+            background-color: #fe5f1e;
+            color: white;
+        }
+
+        a {
+            color: #fe5f1e;
+            padding: 10px;
+            width: 45px;
+            height: 45px;
+            border: 1px solid #fe5f1e;
+            border-radius: 50%;
+            margin-right: 10px;
+            text-align: center;
+
+        }
+    }
+
+    :global {
+        .selected {
+            a {
+                background-color: #fe5f1e;
+                color: white;
+            }
+        }
+
+        .nextBtn, .prevBtn {
+            a {
+                border: 1px solid rgba(#000000, .2);
+                color: black;
+                font-weight: bold;
+            }
+        }
+    }
+
+}

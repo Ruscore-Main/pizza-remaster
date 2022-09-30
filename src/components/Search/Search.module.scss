@@ -1,10 +1,13 @@
 .root {
     border: 1px solid rgba(0, 0, 0, .1);
-    padding: 12px 20px;
+    padding: 12px 15px;
     border-radius: 50px;
     display: flex;
+    justify-content: space-around;
+    align-items: center;
     flex-wrap: nowrap;
     margin: 0 5px ;
+    width: 374px;
     
     svg {
         width: 24px;
@@ -29,5 +32,16 @@
 
     @media (max-width: 950px) {
         margin-top: 15px;
+        width: 300px;
+    }
+}
+
+.clear {
+    width: 18px;
+    height: 18px;
+
+    &:hover {
+        opacity: 1;
+        cursor: pointer;
     }
 }
