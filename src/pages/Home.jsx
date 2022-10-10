@@ -5,8 +5,9 @@ import PizzaLoader from '../components/PizzaBlock/PizzaLoader';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pagination from '../components/Pagination';
+import { SearchContext } from '../App';
 
-const Home = ({searchValue}) => {
+const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [categoryId, setCategoryId] = React.useState(null);
@@ -17,6 +18,8 @@ const Home = ({searchValue}) => {
   });
   const [currentPage, setCurrentPage] = React.useState(1);
   const amountPages = 2;
+
+  const {searchValue, setSearchValue} = React.useContext(SearchContext);
 
   React.useEffect(() => {
     setIsLoaded(false);
