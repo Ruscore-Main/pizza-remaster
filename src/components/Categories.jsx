@@ -6,12 +6,12 @@ const Categories = ({activeIndex, setActiveIndex}) => {
   return (
     <div className="categories">
       <ul>
-        <li className={activeIndex == null ? 'active' : ''} onClick={() => setActiveIndex(null)}>
+        <li className={activeIndex === null ? 'active' : ''} onClick={() => setActiveIndex(null)}>
           Все
         </li>
         {categories.map((el, i) => (
           <li
-            className={activeIndex == i ? 'active' : ''}
+            className={activeIndex === i ? 'active' : ''}
             key={el + i}
             onClick={() => setActiveIndex(i)}>
             {el}

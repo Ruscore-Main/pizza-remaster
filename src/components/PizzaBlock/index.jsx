@@ -21,7 +21,7 @@ const PizzaBlock = ({ name, imageUrl, types, sizes, price }) => {
             {allTypes.map((type, i) => (
               <li
                 className={classNames({
-                  active: i == activeType,
+                  active: i === activeType,
                   muted: !types.includes(i),
                 })}
                 key={`${type}_${i}`}
@@ -34,7 +34,7 @@ const PizzaBlock = ({ name, imageUrl, types, sizes, price }) => {
             {allSizes.map((size, i) => (
               <li
                 className={classNames({
-                  active: size == activeSize,
+                  active: size === activeSize,
                   muted: !sizes.includes(size),
                 })}
                 key={`${size}_${i}`}

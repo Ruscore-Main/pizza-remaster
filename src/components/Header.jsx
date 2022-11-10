@@ -1,9 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import logo from './../assets/img/pizza-logo.svg';
 import Search from './Search';
 
 const Header = () => {
+  const dispatch = useDispatch();
   return (
     <div className="header">
       <div className="container">
@@ -16,7 +18,7 @@ const Header = () => {
             </div>
           </div>
         </Link>
-        <Search />
+        <Search dispatch={dispatch}/>
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>520 ₽</span>
