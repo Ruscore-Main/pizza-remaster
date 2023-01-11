@@ -6,7 +6,7 @@ import styles from './Search.module.scss';
 const Search = ({ dispatch }) => {
   const [searchValue, setSearchValue] = React.useState('');
 
-  const searchField = React.useRef();
+  const searchField = React.useRef('');
 
   const onClickClear = () => {
     setSearchValue('');

@@ -1,14 +1,16 @@
 import React from 'react';
 
+export const sorts = [
+  { name: 'популярности (ASC)', sort: 'rating', order: 'asc' },
+  { name: 'популярности (DESC)', sort: 'rating', order: 'desc' },
+  { name: 'цене (ASC)', sort: 'price', order: 'asc' },
+  { name: 'цене (DESC)', sort: 'price', order: 'desc' },
+  { name: 'алфавиту (ASC)', sort: 'title', order: 'asc' },
+  { name: 'алфавиту (DESC)', sort: 'title', order: 'desc' },
+];
+
 const Sort = ({ currentSort, setCurrentSort }) => {
-  const sorts = [
-    { name: 'популярности (ASC)', sort: 'rating', order: 'asc' },
-    { name: 'популярности (DESC)', sort: 'rating', order: 'desc' },
-    { name: 'цене (ASC)', sort: 'price', order: 'asc' },
-    { name: 'цене (DESC)', sort: 'price', order: 'desc' },
-    { name: 'алфавиту (ASC)', sort: 'title', order: 'asc' },
-    { name: 'алфавиту (DESC)', sort: 'title', order: 'desc' },
-  ];
+  
   const [isVisible, setIsVisible] = React.useState(false);
 
   const popup = React.useRef();
