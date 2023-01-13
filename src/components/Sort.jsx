@@ -21,10 +21,16 @@ const Sort = ({ currentSort, setCurrentSort }) => {
   };
 
   React.useEffect(() => {
-    document.addEventListener('click', (e) => {
+    
+    const handleClick = (e) => {
       const path = e.path || (e.composedPath && e.composedPath());
       !path.includes(popup.current) && setIsVisible(false);
-    });
+    }
+
+    document.addEventListener('click', handleClick);
+
+    return () => document.removeEventListener('click', handleClick);
+
   }, []);
 
   return (

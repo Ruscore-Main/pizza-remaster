@@ -1,11 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import logo from './../assets/img/pizza-logo.svg';
 import Search from './Search';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const {sum, count} = useSelector(state => state.cart);
   return (
     <div className="header">
       <div className="container">
@@ -21,7 +22,7 @@ const Header = () => {
         <Search dispatch={dispatch}/>
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
-            <span>520 ₽</span>
+            <span>{sum} ₽</span>
             <div className="button__delimiter"></div>
             <svg
               width="18"
@@ -51,7 +52,7 @@ const Header = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>3</span>
+            <span>{count}</span>
           </Link>
         </div>
       </div>
