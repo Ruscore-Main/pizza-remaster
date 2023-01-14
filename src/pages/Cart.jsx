@@ -153,7 +153,7 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className="cart__item-price">
-                      <b>{pizza.price} ₽</b>
+                      <b>{pizza.price * pizza[st]} ₽</b>
                     </div>
                     <div className="cart__item-remove" onClick={() => dispatch(clearItems({...pizza, type: st.split('-')[0], size: st.split('-')[1]}))}>
                       <div className="button button--outline button--circle">

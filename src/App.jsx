@@ -12,7 +12,7 @@ import './scss/app.scss';
 
 const App = (props) => {
   const count = useSelector(({cart})=>cart.count)
-  console.log('count === ', count)
+  
   return (
     <div className="wrapper">
       <Header />

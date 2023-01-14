@@ -46,6 +46,13 @@ body {
     margin: 35px 0;
   }
 
+  &__error-info {
+    margin: 60px auto;
+    padding: 30px;
+    max-width: 500px;
+    text-align: center;
+  }
+
   &__items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
