@@ -1,12 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { selectCart } from '../redux/slices/cartSlice';
 import logo from './../assets/img/pizza-logo.svg';
 import Search from './Search';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const {sum, count} = useSelector(state => state.cart);
+  const {sum, count} = useSelector(selectCart);
+  const currentLocation = useLocation();
+  console.log(currentLocation);
+
   return (
     <div className="header">
       <div className="container">
@@ -19,7 +23,10 @@ const Header = () => {
             </div>
           </div>
         </Link>
+
         <Search dispatch={dispatch}/>
+      {
+        currentLocation.pathname !== '/cart' &&
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>{sum} ₽</span>
@@ -55,6 +62,7 @@ const Header = () => {
             <span>{count}</span>
           </Link>
         </div>
+      }
       </div>
     </div>
   );

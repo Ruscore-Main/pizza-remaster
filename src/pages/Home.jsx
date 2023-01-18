@@ -15,6 +15,7 @@ import {
   setSortType,
 } from "../redux/slices/filterSlice";
 import { fetchPizzas } from "../redux/slices/pizzasSlice";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const isSearch = React.useRef(false);
@@ -37,7 +38,7 @@ const Home = () => {
       // Если запрос сделан из строки запроса
       isSearch.current = true;
     }
-  }, []);
+  });
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -59,7 +60,7 @@ const Home = () => {
 
   // Если был первый рендер и изменили параметры запроса
   React.useEffect(() => {
-    if (status == 'success') {
+    if (status === 'success') {
       const queryString = qs.stringify(
         {
           sortBy: sortType.sort,
@@ -105,7 +106,7 @@ const Home = () => {
         <div className="content__items">
         {/* Вывод списка всех товаров */}
         {status === 'success'
-          ? items.map((el) => <PizzaBlock {...el} key={el.id} />)
+          ? items.map((el) => <PizzaBlock key={el.id} {...el} />)
           : Array(10)
               .fill(null)
               .map((_, i) => <PizzaLoader key={i} />)}

@@ -19,6 +19,10 @@ export const pizzasAPI = {
       }
 
       return instance.get(fetchURL).then(({data}) => data)
+    },
+
+    getFullPizza(id) {
+      return instance.get(`/${id}`).then(({data}) => data)
     }
 
 };

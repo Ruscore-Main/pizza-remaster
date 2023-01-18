@@ -108,7 +108,32 @@ body {
       margin: 0;
     }
   }
+
+  &--pizza-info {
+    text-align: center;
+    
+
+    h2 {
+      line-height: 2em;
+    }
+
+    .pizza-description {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      ul {
+        text-align: left;
+      }
+    }
+
+    img {
+      width: 350px;
+    }
+  }
+
 }
+
 
 .cart {
   margin: 0 auto;
