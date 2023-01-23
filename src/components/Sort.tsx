@@ -11,7 +11,7 @@ export const sorts = [
 
 const Sort = ({ currentSort, setCurrentSort }) => {
   
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
 
   const popup = React.useRef();
 

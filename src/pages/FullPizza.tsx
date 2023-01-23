@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { categories } from '../components/Categories';
 import { fetchFullPizza } from '../redux/slices/fullPizzaSlice';
 
-const FullPizza = () => {
+const FullPizza: React.FC = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data, status } = useSelector((state) => state.fullPizza);

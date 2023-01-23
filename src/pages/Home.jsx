@@ -15,7 +15,6 @@ import {
   setSortType,
 } from "../redux/slices/filterSlice";
 import { fetchPizzas } from "../redux/slices/pizzasSlice";
-import { Link } from "react-router-dom";
 
 const Home = () => {
   const isSearch = React.useRef(false);
@@ -34,11 +33,11 @@ const Home = () => {
     const search = window.location.search;
     if (search) {
       const params = qs.parse(search.substring(1));
-      dispatch(setFilters(params));
+      dispatch(setFilters(params)); 
       // Если запрос сделан из строки запроса
       isSearch.current = true;
     }
-  });
+  }, []);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);

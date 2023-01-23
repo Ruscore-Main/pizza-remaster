@@ -13,9 +13,9 @@ const PizzaBlock = ({ id, name, imageUrl, types, sizes, price }) => {
   const dispatch = useDispatch();
   const count = useSelector(({cart})=>cart.items).find(el => el.id === id)?.count;
 
-  const [activeSize, setActiveSize] = React.useState(sizes[0]);
-  const [activeType, setActiveType] = React.useState(types[0]);
-  const [imageLoaded, setImageLoaded] = React.useState(false);
+  const [activeSize, setActiveSize] = React.useState<number>(sizes[0]);
+  const [activeType, setActiveType] = React.useState<number>(types[0]);
+  const [imageLoaded, setImageLoaded] = React.useState<boolean>(false);
   
   return (
     

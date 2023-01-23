@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 import styles from './Search.module.scss';
 
 const Search = ({ dispatch }) => {
-  const [searchValue, setSearchValue] = React.useState('');
+  const [searchValue, setSearchValue] = React.useState<string>('');
 
   const searchField = React.useRef('');
 
