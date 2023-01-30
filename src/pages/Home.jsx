@@ -7,7 +7,7 @@ import PizzaBlock from "../components/PizzaBlock";
 import PizzaLoader from "../components/PizzaBlock/PizzaLoader";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
-import Pagination from "../components/Pagination";
+import Pagination from "../components/Pagination/index.tsx";
 import {
   setCategoryId,
   setCurrentPage,

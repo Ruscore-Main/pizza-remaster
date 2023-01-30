@@ -5,7 +5,7 @@ import { selectCart } from '../redux/slices/cartSlice';
 import logo from './../assets/img/pizza-logo.svg';
 import Search from './Search';
 
-const Header = () => {
+const Header: React.FC = () => {
   const dispatch = useDispatch();
   const {sum, count} = useSelector(selectCart);
   const currentLocation = useLocation();

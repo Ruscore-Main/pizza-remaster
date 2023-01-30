@@ -3,25 +3,25 @@ import { setSearchValue as setSearchValueAC } from '../../redux/slices/filterSli
 import debounce from 'lodash.debounce';
 import styles from './Search.module.scss';
 
-const Search = ({ dispatch }) => {
+const Search = ({ dispatch }: any) => {
   const [searchValue, setSearchValue] = React.useState<string>('');
 
-  const searchField = React.useRef('');
+  const searchField = React.useRef<HTMLInputElement>(null);
 
   const onClickClear = () => {
     setSearchValue('');
     dispatch(setSearchValueAC(''));
-    searchField.current.focus();
+    searchField.current?.focus();
   };
 
   const updateSearchValue = React.useCallback(
-    debounce((val) => {
+    debounce((val: string) => {
       dispatch(setSearchValueAC(val));
     }, 500),
     [],
   );
 
-  const onChangeText = React.useCallback((e) => {
+  const onChangeText = React.useCallback((e: any) => {
     setSearchValue(e.target.value);
     updateSearchValue(e.target.value);
   }, []);

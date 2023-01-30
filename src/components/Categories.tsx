@@ -1,7 +1,12 @@
 import React from 'react';
 export const categories = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-const Categories = ({activeIndex, setActiveIndex}) => {
+type CategoriesProps = {
+  activeIndex: null | number,
+  setActiveIndex: any
+}
+
+const Categories: React.FC<CategoriesProps> = ({activeIndex, setActiveIndex}) => {
   
   return (
     <div className="categories">

@@ -1,6 +1,18 @@
 import React from 'react';
 
-export const sorts = [
+type SortItem = {
+  name: string,
+  sort: string,
+  order: string
+}
+
+type SortProps = {
+  currentSort: SortItem, 
+  setCurrentSort: any 
+}
+
+// Array<SortItem> or SortItem[]
+export const sorts: Array<SortItem> = [
   { name: 'популярности (ASC)', sort: 'rating', order: 'asc' },
   { name: 'популярности (DESC)', sort: 'rating', order: 'desc' },
   { name: 'цене (ASC)', sort: 'price', order: 'asc' },
@@ -9,20 +21,20 @@ export const sorts = [
   { name: 'алфавиту (DESC)', sort: 'title', order: 'desc' },
 ];
 
-const Sort = ({ currentSort, setCurrentSort }) => {
+const Sort: React.FC<SortProps> = ({ currentSort, setCurrentSort }) => {
   
   const [isVisible, setIsVisible] = React.useState<boolean>(false);
 
-  const popup = React.useRef();
+  const popup = React.useRef<HTMLDivElement>(null);
 
-  const onClickListItem = (sort) => {
+  const onClickListItem = (sort: SortItem) => {
     setCurrentSort(sort);
     setIsVisible(false);
   };
 
   React.useEffect(() => {
     
-    const handleClick = (e) => {
+    const handleClick = (e: any) => {
       const path = e.path || (e.composedPath && e.composedPath());
       !path.includes(popup.current) && setIsVisible(false);
     }

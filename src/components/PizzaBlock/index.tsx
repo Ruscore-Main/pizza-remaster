@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import imageLoader from '../../assets/img/imageLoader.svg';
 import { addItem } from '../../redux/slices/cartSlice';
@@ -7,22 +6,35 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const allTypes = ['тонкое', 'традиционное'];
-  const allSizes = [26, 30, 40];
+const allSizes = [26, 30, 40];
 
-const PizzaBlock = ({ id, name, imageUrl, types, sizes, price }) => {
+type PizzaBlockProps = {
+  id: number;
+  name: string;
+  imageUrl: string;
+  types: number[];
+  sizes: number[];
+  price: number;
+};
+
+const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, name, imageUrl, types, sizes, price }) => {
   const dispatch = useDispatch();
-  const count = useSelector(({cart})=>cart.items).find(el => el.id === id)?.count;
+  const count = useSelector(({ cart }: any) => cart.items).find((el: any) => el.id === id)?.count;
 
   const [activeSize, setActiveSize] = React.useState<number>(sizes[0]);
   const [activeType, setActiveType] = React.useState<number>(types[0]);
   const [imageLoaded, setImageLoaded] = React.useState<boolean>(false);
-  
+
   return (
-    
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
         <Link to={`/pizza/${id}`}>
-          <img className="pizza-block__image" onLoad={() => setImageLoaded(true)} src={imageLoaded ? imageUrl : imageLoader} alt="Pizza" />
+          <img
+            className="pizza-block__image"
+            onLoad={() => setImageLoaded(true)}
+            src={imageLoaded ? imageUrl : imageLoader}
+            alt="Pizza"
+          />
         </Link>
         <h4 className="pizza-block__title">{name}</h4>
         <div className="pizza-block__selector">
@@ -57,7 +69,9 @@ const PizzaBlock = ({ id, name, imageUrl, types, sizes, price }) => {
           <div className="pizza-block__price">от {price} ₽</div>
           <button
             className="button button--outline button--add"
-            onClick={() => dispatch(addItem({id, name, imageUrl, size: activeSize, type: activeType, price}))}>
+            onClick={() =>
+              dispatch(addItem({ id, name, imageUrl, size: activeSize, type: activeType, price }))
+            }>
             <svg
               width="12"
               height="12"
@@ -75,16 +89,7 @@ const PizzaBlock = ({ id, name, imageUrl, types, sizes, price }) => {
         </div>
       </div>
     </div>
-      
   );
-};
-
-PizzaBlock.propTypes = {
-  name: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  types: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  sizes: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
 };
 
 export default PizzaBlock;
