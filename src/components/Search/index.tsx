@@ -21,7 +21,7 @@ const Search = ({ dispatch }: any) => {
     [],
   );
 
-  const onChangeText = React.useCallback((e: any) => {
+  const onChangeText = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
     updateSearchValue(e.target.value);
   }, []);

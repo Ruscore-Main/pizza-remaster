@@ -3,7 +3,7 @@ export const categories = ['Мясные', 'Вегетарианская', 'Гр
 
 type CategoriesProps = {
   activeIndex: null | number,
-  setActiveIndex: any
+  setActiveIndex: (index: number | null) => void 
 }
 
 const Categories: React.FC<CategoriesProps> = ({activeIndex, setActiveIndex}) => {

@@ -1,7 +1,15 @@
+import { SortItem } from './../../components/Sort';
 import { createSlice } from '@reduxjs/toolkit';
 import { sorts } from '../../components/Sort';
 
-const initialState = {
+export interface FilterSliceState {
+  searchValue: string,
+  categoryId: number | null,
+  currentPage: number,
+  sortType: SortItem
+}
+
+const initialState: FilterSliceState = {
   searchValue: '',
   categoryId: null,
   currentPage: 1,
@@ -32,7 +40,10 @@ export const filterSlice = createSlice({
       let {category=null, page=1, sortBy='title', order='desc'} = action.payload;
       state.categoryId = category != null ? +category : null ;
       state.currentPage = +page;
-      state.sortType = sorts.find(el => el.sort === sortBy && el.order === order)
+      let sortTypeFound = sorts.find(el => el.sort === sortBy && el.order === order);
+      if (sortTypeFound) {
+        state.sortType = sortTypeFound;
+      }
     }
   },
 });

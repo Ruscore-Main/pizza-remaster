@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { pizzasAPI } from '../../api/api';
 
 
@@ -8,7 +8,23 @@ export const fetchPizzas = createAsyncThunk('pizzas/fetchPizzas', async (params)
     return pizzas;
 })
 
-const initialState = {
+export type Pizza = {
+    id: string;
+    name: string;
+    imageUrl: string;
+    sizes: number[];
+    types: number[];
+    price: number;
+    rating: number;
+    category: number;
+}
+
+export interface PizzaSliceState {
+    items: Pizza[],
+    status: 'loading' | 'success' | 'error'
+}
+
+const initialState: PizzaSliceState = {
     items: [],
     status: 'loading' // loading | success | error
 }
@@ -17,20 +33,20 @@ const pizzasSlice = createSlice({
     name: 'pizzas',
     initialState,
     reducers: {
-        setItems (state, action) {
+        setItems (state, action: PayloadAction<Pizza[]>) {
             state.items = action.payload;
         }
     },
     extraReducers: {
-        [fetchPizzas.pending]: (state) => {
+        [fetchPizzas.pending]: (state: PizzaSliceState) => {
             state.items = [];
             state.status = 'loading';
         },
-        [fetchPizzas.fulfilled]: (state, action) => {
+        [fetchPizzas.fulfilled]: (state: PizzaSliceState, action) => {
             state.items = action.payload;
             state.status = 'success';
         },
-        [fetchPizzas.rejected]: (state) => {
+        [fetchPizzas.rejected]: (state: PizzaSliceState) => {
             state.items = [];
             state.status = 'error';
         },

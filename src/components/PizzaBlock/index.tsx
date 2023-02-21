@@ -1,9 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import imageLoader from '../../assets/img/imageLoader.svg';
-import { addItem } from '../../redux/slices/cartSlice';
+import { addItem, CartItem } from '../../redux/slices/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { RootState } from '../../redux/store';
 
 const allTypes = ['тонкое', 'традиционное'];
 const allSizes = [26, 30, 40];
@@ -19,11 +20,16 @@ type PizzaBlockProps = {
 
 const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, name, imageUrl, types, sizes, price }) => {
   const dispatch = useDispatch();
-  const count = useSelector(({ cart }: any) => cart.items).find((el: any) => el.id === id)?.count;
+  const count = useSelector(({ cart }: RootState) => cart.items).find((el: any) => el.id === id)?.count;
 
   const [activeSize, setActiveSize] = React.useState<number>(sizes[0]);
   const [activeType, setActiveType] = React.useState<number>(types[0]);
   const [imageLoaded, setImageLoaded] = React.useState<boolean>(false);
+
+  const onClickAdd = () => {
+    const item: CartItem = { id, name, imageUrl, size: activeSize, type: activeType, price, count: 0 };
+    dispatch(addItem(item))
+  }
 
   return (
     <div className="pizza-block-wrapper">
@@ -69,9 +75,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, name, imageUrl, types, size
           <div className="pizza-block__price">от {price} ₽</div>
           <button
             className="button button--outline button--add"
-            onClick={() =>
-              dispatch(addItem({ id, name, imageUrl, size: activeSize, type: activeType, price }))
-            }>
+            onClick={onClickAdd}>
             <svg
               width="12"
               height="12"

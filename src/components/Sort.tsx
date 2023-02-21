@@ -1,15 +1,19 @@
 import React from 'react';
 
-type SortItem = {
+export type SortItem = {
   name: string,
-  sort: string,
-  order: string
+  sort: 'rating' | 'price' | 'title',
+  order: 'asc' | 'desc'
 }
 
 type SortProps = {
   currentSort: SortItem, 
-  setCurrentSort: any 
+  setCurrentSort: (sortProperty: SortItem) => void 
 }
+
+type PopupClick = MouseEvent & {
+  path: Node[]
+};
 
 // Array<SortItem> or SortItem[]
 export const sorts: Array<SortItem> = [
@@ -34,12 +38,14 @@ const Sort: React.FC<SortProps> = ({ currentSort, setCurrentSort }) => {
 
   React.useEffect(() => {
     
-    const handleClick = (e: any) => {
-      const path = e.path || (e.composedPath && e.composedPath());
-      !path.includes(popup.current) && setIsVisible(false);
+    const handleClick = (e: MouseEvent) => {
+      // Добавляем новый параметр в тип, т.к. path не существует в MouseEvent
+      const _e = e as PopupClick;
+      const path = _e.path || (_e.composedPath && _e.composedPath());
+      (popup.current && !path.includes(popup.current)) && setIsVisible(false);
     }
 
-    document.addEventListener('click', handleClick);
+    document.body.addEventListener('click', handleClick);
 
     return () => document.removeEventListener('click', handleClick);
 

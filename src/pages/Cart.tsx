@@ -11,7 +11,7 @@ const sizeTypes = [26, 30, 40].map((el) => [`0-${el}`, `1-${el}`]).flat()
   //   .map((el) => [`0-${el}`, `1-${el}`])
   //   .reduce((s, n) => s.concat(n));
 
-const Cart = () => {
+const Cart: React.FC = () => {
 
   const { items, sum, count } = useSelector(selectCart);
   const dispatch = useDispatch();

@@ -6,22 +6,24 @@ import { useNavigate } from "react-router";
 import PizzaBlock from "../components/PizzaBlock";
 import PizzaLoader from "../components/PizzaBlock/PizzaLoader";
 import Categories from "../components/Categories";
-import Sort from "../components/Sort";
-import Pagination from "../components/Pagination/index.tsx";
+import Sort, { SortItem } from "../components/Sort";
+import Pagination from "../components/Pagination/index";
 import {
   setCategoryId,
   setCurrentPage,
   setFilters,
   setSortType,
-} from "../redux/slices/filterSlice";
+}
+from "../redux/slices/filterSlice";
 import { fetchPizzas } from "../redux/slices/pizzasSlice";
+import { RootState } from "../redux/store";
 
-const Home = () => {
+const Home: React.FC = () => {
   const isSearch = React.useRef(false);
 
-  const {items, status} = useSelector(({ pizzas }) => pizzas);
+  const {items, status} = useSelector(({ pizzas }): RootState => pizzas);
   const { categoryId, sortType, searchValue, currentPage } = useSelector(
-    ({ filter }) => filter
+    ({ filter }): RootState => filter
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -79,15 +81,13 @@ const Home = () => {
       <div className="content__top">
         <Categories
           activeIndex={categoryId}
-          setActiveIndex={(i) => {
+          setActiveIndex={(i: number | null) => {
             dispatch(setCategoryId(i));
           }}
         />
         <Sort
           currentSort={sortType}
-          setCurrentSort={(sortProperty) => {
-            dispatch(setSortType(sortProperty));
-          }}
+          setCurrentSort={(sortProperty: SortItem) => dispatch(setSortType(sortProperty))}
         />
       </div>
       <h2 className="content__title">Все пиццы</h2>
@@ -95,7 +95,7 @@ const Home = () => {
         status === "error" ?
         <div className="content__error-info">
           <h2>
-          Произошла ошибка <icon>😕</icon>
+          Произошла ошибка <span>😕</span>
         </h2>
         <p>
           К сожалению, нам не удалось получить список товаров. Пожалуйста, повторите попытку позже.
@@ -105,16 +105,15 @@ const Home = () => {
         <div className="content__items">
         {/* Вывод списка всех товаров */}
         {status === 'success'
-          ? items.map((el) => <PizzaBlock key={el.id} {...el} />)
+          ? items.map((el: any) => <PizzaBlock key={el.id} {...el} />)
           : Array(10)
               .fill(null)
               .map((_, i) => <PizzaLoader key={i} />)}
       </div>
       }
       <Pagination
-        currentPage={currentPage}
         amountPages={amountPages}
-        setCurrentPage={(page) => dispatch(setCurrentPage(page))}
+        setCurrentPage={(page: number) => dispatch(setCurrentPage(page))}
       />
     </div>
   );
